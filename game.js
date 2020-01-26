@@ -21,6 +21,7 @@ function draw(){
     p.drawPlayer();
     p.movePlayer();
     drops.drawDrop();
+    drops.fireDrop();
 
     for(let i = 0; i < eCount; i++){
         e[i].drawEnemy();
@@ -113,6 +114,7 @@ function Drop(){
     this.x = p.x + p.w / 2;
     this.y = p.y;
     this.r = 10;
+    this.fired = false;
 
     this.drawDrop = function(){
         this.x = p.x + p.w / 2;
@@ -120,4 +122,22 @@ function Drop(){
         noStroke();
         ellipse(this.x, this.y, this.r);
     }
+
+    this.fireDrop = function(){
+        // move the bullet up
+        if(this.fired){
+            this.y -= 20;
+        }
+
+        // reset the bullet position
+        if(this.y < 0){
+            this.fired = false;
+            this.y = p.y;
+        }
+    }
+}
+
+// fire the bullet when the mouse button is pressed
+function mousePressed(){
+    drops.fired = true;
 }
