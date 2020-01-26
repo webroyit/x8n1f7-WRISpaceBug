@@ -20,7 +20,10 @@ function draw(){
     for(let i = 0; i < eCount; i++){
         e[i].drawEnemy();
         e[i].moveEnemy();
+        e[i].playerHit();
     }
+
+    endGame();
 }
 
 // define the player ship size
@@ -32,6 +35,8 @@ function Player(){
     // size
     this.w = 50;
     this.h = 20;
+
+    this.playerHit = false;
 
     this.drawPlayer = function(){
         fill(250);      // add color
@@ -72,5 +77,27 @@ function Enemy(x, y){
             // chnage the direction of the enemy movement
             this.speedX *= -1;
         }
+    }
+
+    this.playerHit = function(){
+        // check if the enemy touch the player ship
+        if(this.x > p.x && this.x < p.x + p.w && this.y > p.y){
+            p.playerHit = true;
+            this.speedX = 0;
+        }
+    }
+}
+
+function endGame(){
+    // end the game if player ship is hit
+    if(p.playerHit){
+        background(255, 0, 0);
+        p.x = 255;
+        fill(255);
+        noStroke();
+
+        // display a message
+        textSize(32);
+        text("You Lose", 200, 250);
     }
 }
