@@ -9,6 +9,7 @@ function setup(){
 function draw(){
     background(50);
     p.drawPlayer();
+    p.movePlayer();
 }
 
 // define the player ship size
@@ -22,5 +23,10 @@ function Player(){
         fill(250);      // add color
         noStroke();   // remove border line
         rect(this.x, this.y, this.w, this.h);
+    }
+
+    // move the player ship based on the mouse
+    this.movePlayer = function(){
+        this.x = mouseX - this.w / 2;
     }
 }
