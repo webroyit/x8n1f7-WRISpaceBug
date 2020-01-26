@@ -1,8 +1,26 @@
+var p;
+
 function setup(){
-    createCanvas(600, 400);
+    createCanvas(600, 600);
+    p = new Player();
 }
 
+// show the content on the screen
 function draw(){
-    // add the background color
     background(50);
+    p.drawPlayer();
+}
+
+// define the player ship size
+function Player(){
+    this.x = 275;
+    this.y = 550;
+    this.w = 50;
+    this.h = 20;
+
+    this.drawPlayer = function(){
+        fill(250);      // add color
+        noStroke();   // remove border line
+        rect(this.x, this.y, this.w, this.h);
+    }
 }
