@@ -30,6 +30,7 @@ function draw(){
     }
 
     endGame();
+    checkDropHitEnemy();
 }
 
 // define the player ship size
@@ -68,28 +69,36 @@ function Enemy(x, y){
     // speed of the enemy
     this.speedX = 5;
 
+    this.beenHit = false;
+
     this.drawEnemy = function(){
-        fill(0, 255, 0);
-        noStroke();
-        ellipse(this.x, this.y, this.r);    // cirle shape
+        if(!this.beenHit){
+            fill(0, 255, 0);
+            noStroke();
+            ellipse(this.x, this.y, this.r);    // cirle shape
+        }
     }
 
     this.moveEnemy = function(){
-        this.x += this.speedX;
-        if(this.x > width || this.x < 0){
-            // move the enemy to the next row if it reach the wall
-            this.y += 40;
-
-            // chnage the direction of the enemy movement
-            this.speedX *= -1;
+        if(!this.beenHit){
+            this.x += this.speedX;
+            if(this.x > width || this.x < 0){
+                // move the enemy to the next row if it reach the wall
+                this.y += 40;
+    
+                // chnage the direction of the enemy movement
+                this.speedX *= -1;
+            }
         }
     }
 
     this.playerHit = function(){
-        // check if the enemy touch the player ship
-        if(this.x > p.x && this.x < p.x + p.w && this.y > p.y){
-            p.playerHit = true;
-            this.speedX = 0;
+        if(!this.beenHit){
+            // check if the enemy touch the player ship
+            if(this.x > p.x && this.x < p.x + p.w && this.y > p.y){
+                p.playerHit = true;
+                this.speedX = 0;
+            }
         }
     }
 }
@@ -140,4 +149,13 @@ function Drop(){
 // fire the bullet when the mouse button is pressed
 function mousePressed(){
     drops.fired = true;
+}
+
+function checkDropHitEnemy(){
+    for(let i = 0; i < e.length; i++){
+        if(drops.x - drops.r / 2 > e[i].x - e[i].r && drops.x + drops.r / 2 < e[i].x + e[i].r &&
+           drops.y - drops.r / 2 > e[i].y - e[i].r && drops.y + drops.r / 2 < e[i].y + e[i].r ){
+               e[i].beenHit = true;
+           }
+    }
 }
