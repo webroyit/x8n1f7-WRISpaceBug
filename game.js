@@ -1,10 +1,14 @@
 var p;
 var e = [];
+var drops;
+
 const eCount = 8;
 
+// set up game
 function setup(){
     createCanvas(600, 600);
     p = new Player();
+    drops = new Drop;
     
     for(let i = 0; i < eCount; i++){
         e[i] = new Enemy(i * 40 + 40, 40);
@@ -16,6 +20,7 @@ function draw(){
     background(50);
     p.drawPlayer();
     p.movePlayer();
+    drops.drawDrop();
 
     for(let i = 0; i < eCount; i++){
         e[i].drawEnemy();
@@ -88,6 +93,7 @@ function Enemy(x, y){
     }
 }
 
+// end the game
 function endGame(){
     // end the game if player ship is hit
     if(p.playerHit){
@@ -99,5 +105,19 @@ function endGame(){
         // display a message
         textSize(32);
         text("You Lose", 200, 250);
+    }
+}
+
+// define the bullet size
+function Drop(){
+    this.x = p.x + p.w / 2;
+    this.y = p.y;
+    this.r = 10;
+
+    this.drawDrop = function(){
+        this.x = p.x + p.w / 2;
+        fill(0, 0, 255);
+        noStroke();
+        ellipse(this.x, this.y, this.r);
     }
 }
