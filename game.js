@@ -137,10 +137,13 @@ function Drop(){
         if(this.fired){
             this.y -= 20;
         }
-
-        // reset the bullet position
+        
         if(this.y < 0){
             this.fired = false;
+        }
+
+        // reset the bullet position
+        if(!this.fired){
             this.y = p.y;
         }
     }
@@ -153,9 +156,10 @@ function mousePressed(){
 
 function checkDropHitEnemy(){
     for(let i = 0; i < e.length; i++){
-        if(drops.x - drops.r / 2 > e[i].x - e[i].r && drops.x + drops.r / 2 < e[i].x + e[i].r &&
-           drops.y - drops.r / 2 > e[i].y - e[i].r && drops.y + drops.r / 2 < e[i].y + e[i].r ){
+        if(drops.x > e[i].x - e[i].r / 2 && drops.x < e[i].x + e[i].r / 2 &&
+           drops.y > e[i].y - e[i].r / 2 && drops.y < e[i].y + e[i].r / 2){
                e[i].beenHit = true;
+               drops.fired = false;
            }
     }
 }
