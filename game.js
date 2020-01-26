@@ -19,6 +19,7 @@ function draw(){
 
     for(let i = 0; i < eCount; i++){
         e[i].drawEnemy();
+        e[i].moveEnemy();
     }
 }
 
@@ -53,9 +54,23 @@ function Enemy(x, y){
     // radius
     this.r = 30;
 
+    // speed of the enemy
+    this.speedX = 5;
+
     this.drawEnemy = function(){
         fill(0, 255, 0);
         noStroke();
         ellipse(this.x, this.y, this.r);    // cirle shape
+    }
+
+    this.moveEnemy = function(){
+        this.x += this.speedX;
+        if(this.x > width || this.x < 0){
+            // move the enemy to the next row if it reach the wall
+            this.y += 40;
+
+            // chnage the direction of the enemy movement
+            this.speedX *= -1;
+        }
     }
 }
