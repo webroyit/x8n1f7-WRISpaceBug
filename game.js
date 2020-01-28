@@ -1,6 +1,7 @@
 var p;
 var e = [];
 var drops;
+var enemyLeft;
 
 const eCount = 8;
 
@@ -13,6 +14,8 @@ function setup(){
     for(let i = 0; i < eCount; i++){
         e[i] = new Enemy(i * 40 + 40, 40);
     }
+
+    enemyLeft = e.length;
 }
 
 // show the content on the screen
@@ -31,6 +34,11 @@ function draw(){
 
     endGame();
     checkDropHitEnemy();
+
+    // display the text
+    textSize(12);
+    fill(255);
+    text("Enemy Left: " + enemyLeft, 500, 575);
 }
 
 // define the player ship size
@@ -160,6 +168,7 @@ function checkDropHitEnemy(){
            drops.y > e[i].y - e[i].r / 2 && drops.y < e[i].y + e[i].r / 2){
                e[i].beenHit = true;
                drops.fired = false;
+               enemyLeft--;
            }
     }
 }
