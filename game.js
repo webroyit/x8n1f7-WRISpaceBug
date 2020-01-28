@@ -39,6 +39,8 @@ function draw(){
     textSize(12);
     fill(255);
     text("Enemy Left: " + enemyLeft, 500, 575);
+
+    winGame();
 }
 
 // define the player ship size
@@ -162,6 +164,7 @@ function mousePressed(){
     drops.fired = true;
 }
 
+// check if the enemy is hitted by the bullet
 function checkDropHitEnemy(){
     for(let i = 0; i < e.length; i++){
         if(drops.x > e[i].x - e[i].r / 2 && drops.x < e[i].x + e[i].r / 2 &&
@@ -170,5 +173,18 @@ function checkDropHitEnemy(){
                drops.fired = false;
                enemyLeft--;
            }
+    }
+}
+
+function winGame(){
+    if(enemyLeft === 0){
+        background(0, 200, 0);
+        p.x = 255;
+        fill(255);
+        noStroke();
+
+        // display a message
+        textSize(32);
+        text("You Win", 200, 250);
     }
 }
