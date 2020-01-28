@@ -167,12 +167,15 @@ function mousePressed(){
 // check if the enemy is hitted by the bullet
 function checkDropHitEnemy(){
     for(let i = 0; i < e.length; i++){
-        if(drops.x > e[i].x - e[i].r / 2 && drops.x < e[i].x + e[i].r / 2 &&
-           drops.y > e[i].y - e[i].r / 2 && drops.y < e[i].y + e[i].r / 2){
-               e[i].beenHit = true;
-               drops.fired = false;
-               enemyLeft--;
-           }
+        if(!e[i].beenHit){
+            if(drops.x > e[i].x - e[i].r / 2 && drops.x < e[i].x + e[i].r / 2 &&
+                drops.y > e[i].y - e[i].r / 2 && drops.y < e[i].y + e[i].r / 2){
+                    e[i].beenHit = true;
+                    drops.fired = false;
+                    enemyLeft--;
+                }
+        }
+        
     }
 }
 
