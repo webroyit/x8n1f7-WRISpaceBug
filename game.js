@@ -28,6 +28,7 @@ function draw(){
     drops.drawDrop();
     drops.fireDrop();
     boss.drawBoss();
+    boss.moveBoss();
 
     for(let i = 0; i < eCount; i++){
         e[i].drawEnemy();
@@ -206,5 +207,15 @@ function Boss(){
         fill(255, 0, 0);
         noStroke();
         rect(this.x, this.y, this.w, this.h);
+    }
+
+    // make the boss move based on the player movement
+    this.moveBoss = function(){
+        if(this.x + this.w / 2 < p.x + p.w / 2){
+            this.x += 3;
+        }
+        if(this.x + this.w / 2 > p.x + p.w / 2){
+            this.x -= 3;
+        }
     }
 }
