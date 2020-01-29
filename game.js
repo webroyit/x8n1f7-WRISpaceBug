@@ -82,7 +82,7 @@ function Enemy(x, y){
     this.r = 30;
 
     // speed of the enemy
-    this.speedX = 5;
+    this.speedX = 3;
 
     this.beenHit = false;
 
@@ -122,7 +122,7 @@ function Enemy(x, y){
 function endGame(){
     // end the game if player ship is hit
     if(p.playerHit){
-        background(255, 0, 0);
+        background(155, 35, 35);
         p.x = 255;
         fill(255);
         noStroke();
@@ -187,7 +187,7 @@ function checkDropHitEnemy(){
 
 function winGame(){
     if(enemyLeft === 0){
-        background(0, 200, 0);
+        background(36, 121, 10);
         p.x = 255;
         fill(255);
         noStroke();
