@@ -206,6 +206,7 @@ function Boss(){
     this.wX = this.x + this.w / 2;
     this.wY = this.y + this.h;
     this.wR = 10;
+    this.wSpeed = 10;
 
     this.drawBoss = function(){
         fill(255, 0, 0);
@@ -226,10 +227,20 @@ function Boss(){
         this.wX = this.x + this.w / 2;
     }
 
+    // allow the boss to fire the bullet
     this.fireWeapon = function(){
-        this.wY += 10;
+        this.wY += this.wSpeed;
+
+        // bring the bullet back to the boss
         if(this.wY > height){
             this.wY = this.y;
         }
+
+        // game over if the boss bullet hits the player
+        if(this.wX > p.x && this.wX < p.x + p.w && this.wY > p.y &&
+            this.wY < p.y + p.h){
+                p.playerHit = true;
+                this.wSpeed = 0;
+            }
     }
 }
