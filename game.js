@@ -29,6 +29,7 @@ function draw(){
     drops.fireDrop();
     boss.drawBoss();
     boss.moveBoss();
+    boss.fireWeapon();
 
     for(let i = 0; i < eCount; i++){
         e[i].drawEnemy();
@@ -221,7 +222,14 @@ function Boss(){
         if(this.x + this.w / 2 > p.x + p.w / 2){
             this.x -= 3;
         }
-        
+
         this.wX = this.x + this.w / 2;
+    }
+
+    this.fireWeapon = function(){
+        this.wY += 10;
+        if(this.wY > height){
+            this.wY = this.y;
+        }
     }
 }
