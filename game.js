@@ -202,11 +202,15 @@ function Boss(){
     this.y = 0;
     this.w = 50;
     this.h = 20;
+    this.wX = this.x + this.w / 2;
+    this.wY = this.y + this.h;
+    this.wR = 10;
 
     this.drawBoss = function(){
         fill(255, 0, 0);
         noStroke();
         rect(this.x, this.y, this.w, this.h);
+        ellipse(this.wX, this.wY, this.wR);
     }
 
     // make the boss move based on the player movement
@@ -217,5 +221,7 @@ function Boss(){
         if(this.x + this.w / 2 > p.x + p.w / 2){
             this.x -= 3;
         }
+        
+        this.wX = this.x + this.w / 2;
     }
 }
