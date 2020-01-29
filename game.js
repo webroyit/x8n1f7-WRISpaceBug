@@ -4,11 +4,11 @@ var drops;
 var enemyLeft;
 var boss;
 
-const eCount = 8;
+const eCount = 10;
 
 // set up game
 function setup(){
-    createCanvas(600, 600);
+    createCanvas(500, 600);
     p = new Player();
     drops = new Drop;
     
@@ -43,7 +43,7 @@ function draw(){
     // display the text
     textSize(12);
     fill(255);
-    text("Enemy Left: " + enemyLeft, 500, 575);
+    text("Enemy Left: " + enemyLeft, 400, 585);
 
     winGame();
 }
@@ -129,7 +129,7 @@ function endGame(){
 
         // display a message
         textSize(32);
-        text("You Lose", 200, 250);
+        text("You Lose", 180, 250);
     }
 }
 
@@ -194,7 +194,7 @@ function winGame(){
 
         // display a message
         textSize(32);
-        text("You Win", 200, 250);
+        text("You Win", 180, 250);
     }
 }
 
