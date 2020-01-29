@@ -2,6 +2,7 @@ var p;
 var e = [];
 var drops;
 var enemyLeft;
+var boss;
 
 const eCount = 8;
 
@@ -16,6 +17,7 @@ function setup(){
     }
 
     enemyLeft = e.length;
+    boss = new Boss();
 }
 
 // show the content on the screen
@@ -25,6 +27,7 @@ function draw(){
     p.movePlayer();
     drops.drawDrop();
     drops.fireDrop();
+    boss.drawBoss();
 
     for(let i = 0; i < eCount; i++){
         e[i].drawEnemy();
@@ -167,15 +170,16 @@ function mousePressed(){
 // check if the enemy is hitted by the bullet
 function checkDropHitEnemy(){
     for(let i = 0; i < e.length; i++){
-        if(!e[i].beenHit){
-            if(drops.x > e[i].x - e[i].r / 2 && drops.x < e[i].x + e[i].r / 2 &&
-                drops.y > e[i].y - e[i].r / 2 && drops.y < e[i].y + e[i].r / 2){
-                    e[i].beenHit = true;
-                    drops.fired = false;
-                    enemyLeft--;
-                }
+        if(!p.playerHit){
+            if(!e[i].beenHit){
+                if(drops.x > e[i].x - e[i].r / 2 && drops.x < e[i].x + e[i].r / 2 &&
+                    drops.y > e[i].y - e[i].r / 2 && drops.y < e[i].y + e[i].r / 2){
+                        e[i].beenHit = true;
+                        drops.fired = false;
+                        enemyLeft--;
+                    }
+            }
         }
-        
     }
 }
 
@@ -189,5 +193,18 @@ function winGame(){
         // display a message
         textSize(32);
         text("You Win", 200, 250);
+    }
+}
+
+function Boss(){
+    this.x = 275;
+    this.y = 0;
+    this.w = 50;
+    this.h = 20;
+
+    this.drawBoss = function(){
+        fill(255, 0, 0);
+        noStroke();
+        rect(this.x, this.y, this.w, this.h);
     }
 }
