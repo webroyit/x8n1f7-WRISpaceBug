@@ -1,4 +1,5 @@
 var p;
+var playerLife = 3;
 var e = [];
 var drops;
 var enemyLeft;
@@ -43,6 +44,7 @@ function draw(){
     // display the text
     textSize(12);
     fill(255);
+    text("Your Life: " + playerLife, 20, 585);
     text("Enemy Left: " + enemyLeft, 400, 585);
 
     winGame();
@@ -239,8 +241,14 @@ function Boss(){
         // game over if the boss bullet hits the player
         if(this.wX > p.x && this.wX < p.x + p.w && this.wY > p.y &&
             this.wY < p.y + p.h){
-                p.playerHit = true;
-                this.wSpeed = 0;
+                if(!p.playerHit){
+                    playerLife--;
+                }
+                
+                if(playerLife <= 0){
+                    p.playerHit = true;
+                    this.wSpeed = 0;
+                }
             }
     }
 }
